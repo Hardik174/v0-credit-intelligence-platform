@@ -47,7 +47,7 @@ export function ResearchArticleCard({ article }: ResearchArticleCardProps) {
       <div className="flex items-center justify-between pt-3 border-t border-gray-100">
         <span className="text-xs text-gray-400">
           {new Date(article.publishedAt).toLocaleDateString('en-IN', {
-            day: 'short',
+            day: 'numeric',
             month: 'short',
             year: 'numeric',
           })}
