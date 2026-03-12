@@ -26,3 +26,22 @@ export interface RiskIndicator {
   threshold: number;
   status: 'safe' | 'warning' | 'danger';
 }
+
+export type LoanRecommendation = 'APPROVE' | 'REVIEW' | 'REJECT';
+export type RiskGrade = 'AAA' | 'AA' | 'A' | 'BBB' | 'BB' | 'B';
+
+export interface RiskFactorBreakdown {
+  name: 'Financial Risk' | 'Legal Risk' | 'Operational Risk' | 'Sector Risk' | 'Reputation Risk';
+  score: number;
+}
+
+export interface CreditDecision {
+  entityId: string;
+  loanRecommendation: LoanRecommendation;
+  riskScore: number;
+  riskGrade: RiskGrade;
+  reasoning: string[];
+  riskFactorBreakdown: RiskFactorBreakdown[];
+  dataSourceTags: string[];
+  generatedAt: string;
+}

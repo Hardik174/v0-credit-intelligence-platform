@@ -9,6 +9,7 @@ import { MacroIndicatorCard } from '@/components/research/MacroIndicatorCard';
 import { RiskSignalCard } from '@/components/research/RiskSignalCard';
 import { InsightSummaryCard } from '@/components/research/InsightSummaryCard';
 import { ResearchArticleCard } from '@/components/research/ResearchArticleCard';
+import { AICreditDecisionEngine } from '@/components/research/AICreditDecisionEngine';
 
 export default function ResearchPage() {
   const {
@@ -74,6 +75,9 @@ export default function ResearchPage() {
           </div>
         </CardContent>
       </Card>
+
+      {/* AI Credit Decision Engine */}
+      <AICreditDecisionEngine entityId="ent-001" />
 
       {/* AI Insight Summary */}
       {aiInsight && (
