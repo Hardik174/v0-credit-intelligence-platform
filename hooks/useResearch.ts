@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ResearchInsight, SectorTrend, MacroIndicator } from '@/types/research';
+import { ResearchInsight, SectorTrend, MacroIndicator, RiskSignal, AIInsightSummary } from '@/types/research';
 
 const mockInsights: ResearchInsight[] = [
   {
@@ -67,10 +67,49 @@ const mockMacroIndicators: MacroIndicator[] = [
   { name: 'Industrial Production', value: 5.8, change: 0.5, trend: 'up' },
 ];
 
+const mockRiskSignals: RiskSignal[] = [
+  {
+    id: 'rs1',
+    title: 'Litigation Cases',
+    value: '2 cases found',
+    riskLevel: 'High',
+    description: 'Promoter or company linked to active litigation records.',
+  },
+  {
+    id: 'rs2',
+    title: 'Negative News',
+    value: '3 recent articles',
+    riskLevel: 'Medium',
+    description: 'Negative media sentiment detected in sector coverage.',
+  },
+  {
+    id: 'rs3',
+    title: 'Regulatory Alerts',
+    value: '1 alert',
+    riskLevel: 'Medium',
+    description: 'Recent RBI or SEBI policy changes impacting sector.',
+  },
+  {
+    id: 'rs4',
+    title: 'Sector Risk Level',
+    value: 'Medium',
+    riskLevel: 'Medium',
+    description: 'Stable but volatile pricing pressures.',
+  },
+];
+
+const mockAIInsight: AIInsightSummary = {
+  summary:
+    'Recent media coverage indicates regulatory scrutiny in the sector alongside increased import pressure from Chinese producers. While Tata Steel\'s operational performance remains strong, sector margins may face short-term compression due to global supply conditions. The 2 active litigation cases require monitoring, though they are not expected to materially impact operations in the near term.',
+  timestamp: new Date().toISOString(),
+};
+
 export function useResearch(entityId?: string) {
   const [insights, setInsights] = useState<ResearchInsight[]>([]);
   const [sectorTrends, setSectorTrends] = useState<SectorTrend[]>([]);
   const [macroIndicators, setMacroIndicators] = useState<MacroIndicator[]>([]);
+  const [riskSignals, setRiskSignals] = useState<RiskSignal[]>([]);
+  const [aiInsight, setAIInsight] = useState<AIInsightSummary | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -80,10 +119,30 @@ export function useResearch(entityId?: string) {
       setInsights(mockInsights);
       setSectorTrends(mockSectorTrends);
       setMacroIndicators(mockMacroIndicators);
+      setRiskSignals(mockRiskSignals);
+      setAIInsight(mockAIInsight);
       setIsLoading(false);
     };
     fetchResearch();
   }, [entityId]);
 
-  return { insights, sectorTrends, macroIndicators, isLoading };
+  const regenerateInsight = async () => {
+    // Simulate AI regeneration
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+    setAIInsight({
+      ...mockAIInsight,
+      timestamp: new Date().toISOString(),
+      summary: `Updated: Recent market dynamics show ${['increased', 'moderate', 'declining'][Math.floor(Math.random() * 3)]} pressure on sector valuations. The entity's strong operational metrics provide a cushion against external headwinds.`,
+    });
+  };
+
+  return {
+    insights,
+    sectorTrends,
+    macroIndicators,
+    riskSignals,
+    aiInsight,
+    isLoading,
+    regenerateInsight,
+  };
 }

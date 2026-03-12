@@ -1,4 +1,5 @@
 export type Sentiment = 'Positive' | 'Neutral' | 'Negative';
+export type RiskLevel = 'Low' | 'Medium' | 'High';
 
 export interface ResearchInsight {
   id: string;
@@ -23,4 +24,18 @@ export interface MacroIndicator {
   value: number;
   change: number;
   trend: 'up' | 'down' | 'stable';
+}
+
+export interface RiskSignal {
+  id: string;
+  title: string;
+  value: string;
+  riskLevel: RiskLevel;
+  description: string;
+  icon?: string;
+}
+
+export interface AIInsightSummary {
+  summary: string;
+  timestamp: string;
 }
