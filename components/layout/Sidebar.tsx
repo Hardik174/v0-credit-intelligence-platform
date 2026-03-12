@@ -20,6 +20,8 @@ import {
   ChevronLeft,
   ChevronRight,
   Zap,
+  UserPlus,
+  BarChart3,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -28,6 +30,8 @@ const navItems = [
   { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { label: 'Entities', href: '/entities', icon: Building2 },
   { label: 'New Assessment', href: '/new-assessment', icon: FilePlus2 },
+  { label: 'Onboarding', href: '/onboarding', icon: UserPlus },
+  { label: 'Analysis Results', href: '/results', icon: BarChart3 },
   { label: 'Documents', href: '/documents', icon: FileStack },
   { label: 'Extraction Review', href: '/extraction', icon: TableProperties },
   { label: 'Schema Builder', href: '/schema-builder', icon: Blocks },

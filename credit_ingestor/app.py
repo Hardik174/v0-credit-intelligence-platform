@@ -31,6 +31,7 @@ from typing import Any, Dict, List, Optional
 from . import config
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
@@ -102,6 +103,18 @@ app = FastAPI(
     ),
     version="2.0.0",
     lifespan=lifespan,
+)
+
+# ---------------------------------------------------------------------------
+# CORS – allow the Next.js frontend at localhost:3000
+# ---------------------------------------------------------------------------
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 ALLOWED_PDF_TYPES = {"application/pdf"}
@@ -231,9 +244,7 @@ def _run_extraction_pipeline(session) -> Dict[str, Any]:
         financial_commitments=pdf_extracted,
         gst_analysis=gst_bank_analysis.get("gst_summary", {}),
         bank_analysis=gst_bank_analysis.get("bank_summary", {}),
-        fraud_flags=(
-            gst_bank_analysis.get("fraud_flags", []) + risk_result.get("flags", [])
-        ),
+        fraud_flags=gst_bank_analysis.get("fraud_flags", []),
         risk_score=risk_result["score"],
         risk_level=risk_result["level"],
     )
@@ -351,9 +362,7 @@ async def analyze(
         financial_commitments=pdf_extracted,
         gst_analysis=gst_bank_analysis.get("gst_summary", {}),
         bank_analysis=gst_bank_analysis.get("bank_summary", {}),
-        fraud_flags=(
-            gst_bank_analysis.get("fraud_flags", []) + risk_result.get("flags", [])
-        ),
+        fraud_flags=gst_bank_analysis.get("fraud_flags", []),
         risk_score=risk_result["score"],
         risk_level=risk_result["level"],
     )
