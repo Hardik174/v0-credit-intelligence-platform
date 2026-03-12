@@ -1,0 +1,27 @@
+# IntelliCredit – Data Ingestor Pipeline
+# Python dependencies
+
+# Web framework
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+python-multipart==0.0.9      # required for FastAPI file uploads
+
+# PDF parsing
+pdfplumber==0.11.0
+
+# Data processing
+pandas==2.2.2
+openpyxl==3.1.2              # Excel (.xlsx) support for pandas
+
+# Graph analysis
+networkx==3.3
+
+# LLM integration (optional – only needed when GROQ_API_KEY is set)
+groq==0.9.0                  # Groq Python client for Llama3
+
+# Utilities
+python-dotenv==1.0.1         # load .env file for API keys
+
+# ── Demo / development only ─────────────────────────────────────────────
+# Generate demo PDFs from demo_data/*.txt → run:  python demo_data/generate_pdfs.py
+reportlab==4.2.2
