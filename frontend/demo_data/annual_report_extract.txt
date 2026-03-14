@@ -1,0 +1,186 @@
+══════════════════════════════════════════════════════════════════
+RAMESH STEEL & FABRICATIONS PRIVATE LIMITED
+CIN: U27100MH2011PTC218847  |  GSTIN: 27AABCR1234F1Z5
+Registered Office: Plot 18-B, MIDC Bhiwandi, Thane – 421 302, Maharashtra
+══════════════════════════════════════════════════════════════════
+
+      ANNUAL REPORT FY 2022-23
+      EXTRACT FOR CREDIT ASSESSMENT PURPOSES
+
+══════════════════════════════════════════════════════════════════
+
+SECTION 1: FINANCIAL HIGHLIGHTS (STANDALONE)
+─────────────────────────────────────────────
+
+                                FY 2022-23          FY 2021-22
+                                (Audited)           (Audited)
+                                ──────────────────────────────
+Revenue from Operations       : INR 48.52 Crore    INR 39.18 Crore
+Other Income                  : INR  0.83 Crore    INR  0.61 Crore
+EBITDA                        : INR  5.42 Crore    INR  4.19 Crore
+EBITDA Margin                 : 11.1%              10.7%
+Profit Before Tax (PBT)       : INR  2.89 Crore    INR  2.11 Crore
+Tax Expense                   : INR  0.72 Crore    INR  0.53 Crore
+Profit After Tax (PAT)        : INR  2.17 Crore    INR  1.58 Crore
+Net Worth                     : INR 12.44 Crore    INR 10.27 Crore
+Total Debt                    : INR 18.85 Crore    INR 16.20 Crore
+Debt-Equity Ratio             : 1.52               1.58
+Current Ratio                 : 1.38               1.29
+Return on Net Worth           : 17.4%              15.4%
+
+SECTION 2: AUDITOR'S REPORT (RELEVANT EXTRACTS)
+─────────────────────────────────────────────────
+
+Independent Auditor's Report to the Members of
+Ramesh Steel & Fabrications Private Limited
+For the year ended 31 March 2023
+
+M/s. Pramod & Associates, Chartered Accountants
+Membership No. 105873 | FRN: 108744W
+4th Floor, Sakar Complex, Dadar (West), Mumbai – 400 028
+
+QUALIFIED OPINION
+
+We have audited the financial statements of Ramesh Steel & Fabrications Private
+Limited ("the Company"), which comprise the Balance Sheet as at 31st March 2023,
+the Statement of Profit and Loss, Statement of Cash Flows, and the Statement of
+Changes in Equity for the year then ended.
+
+In our opinion, except for the matters described in the Basis for Qualified Opinion
+paragraph below, the aforesaid standalone financial statements give a true and fair
+view in conformity with Indian Accounting Standards (Ind AS).
+
+BASIS FOR QUALIFIED OPINION
+
+1. Going Concern – Stretched Working Capital:
+   As detailed in Note 28, the Company's net current assets declined from INR 3.82
+   Crore (FY 2021-22) to INR 2.96 Crore (FY 2022-23). The Working Capital Turnover
+   ratio has deteriorated, and the Company is heavily reliant on short-term bank
+   borrowings to fund operations. As at 31st March 2023, outstanding overdue trade
+   payables aged beyond 90 days stood at INR 1.23 Crore. Management has represented
+   that steps are being taken to restructure working capital facilities, but no formal
+   restructuring approval was obtained as at the date of this report.
+   In view of the above, there exists material uncertainty that may cast significant
+   doubt on the Company's ability to continue as a going concern.
+
+2. Related Party Transactions:
+   During the year, the Company entered into transactions aggregating INR 12.45 Crore
+   with Sus Metals & Alloys Private Ltd (a related entity by virtue of common
+   directorship by the promoter Shri Ramesh Kumar Sharma) and INR 8.70 Crore with
+   Ashwin Trading Company (in which a promoter family member holds directorship).
+   The Company has not obtained independent valuation or arm's length certification
+   for these transactions during the year. These are, however, disclosed as related
+   party transactions as required under IND AS 24.
+
+3. Revenue Recognition:
+   Certain invoices totalling INR 3.48 Crore raised during Q4 FY 2022-23 to
+   Sus Metals & Alloys Pvt Ltd and Padmavati Distributors LLP have not been
+   confirmed for receipt by the counter-parties as at the balance sheet date.
+   We were unable to independently confirm realisation from these parties.
+   This is a matter of significant concern from an audit perspective.
+
+KEY AUDIT MATTERS
+
+Revenue from Operations – Completeness and Timing of Recognition
+The Company recognised revenue of INR 48.52 Crore during the year. We noted that
+revenue concentration with a limited number of related parties increased during the
+year. 26.3% of total revenue is attributable to Sus Metals & Alloys Pvt Ltd and
+Ashwin Trading Company, both of which are related parties. The timing of recognition
+of certain invoices near the year-end is identified as a key audit matter.
+
+SECTION 3: CONTINGENT LIABILITIES AND COMMITMENTS
+───────────────────────────────────────────────────
+
+NOTE 22 – Contingent Liabilities as at 31 March 2023
+
+a) Claims against the company not acknowledged as debt:
+
+   i.  Bank Guarantees outstanding as at 31-Mar-2023:
+       – Guarantee issued in favour of MSEDCL for contracted power:
+         INR 2,50,00,000 (valid until 31-Mar-2025)
+       – Guarantee issued in favour of Custom Commissioner Mumbai:
+         INR 18,00,000 (valid until 30-Sep-2023)
+       Total Bank Guarantees Outstanding: INR 2,68,00,000
+
+   ii. Legal Dispute – Arbitration by M/s Mehta Alloys Pvt Ltd:
+       A former supplier has filed an arbitration claim for INR 68,50,000
+       alleging non-payment of dues on three disputed invoices. Legal notice
+       was served on the Company on 04-Jul-2022. The arbitration proceedings
+       have commenced before a sole arbitrator in Mumbai. Our legal counsel
+       advises that the claim is likely to be disputed but the outcome
+       is uncertain.
+
+   iii. Income Tax Demand under Appeal:
+        Assessment Year 2020-21: INR 78,20,000 (pending before CIT Appeals)
+        Assessment Year 2021-22: INR 31,10,000 (pending before ITAT)
+
+   iv.  Customs Duty Dispute:
+        INR 22,80,000 pending before the Assistant Commissioner of Customs
+
+   Total contingent liabilities: INR 4,68,60,000
+
+b) Capital Commitments (net of advances): INR 1,15,00,000
+
+SECTION 4: DEBT RECOVERY TRIBUNAL
+───────────────────────────────────
+
+NOTE 29 – Legal Proceedings
+
+The Company has received a notice from the Debt Recovery Tribunal (DRT),
+Mumbai Bench under Section 19 of the Recovery of Debts and Bankruptcy Act, 1993
+filed by Punjab National Bank. The notice pertains to outstanding dues on a
+term loan facility that was classified as NPA (Non-Performing Asset) by
+Punjab National Bank in FY 2021-22, with outstanding principal and interest
+of INR 1,42,75,000 as on the date of filing.
+
+The Company has settled a significant portion of this outstanding and entered
+into a settlement (OTS) for the balance. As at 31-Mar-2023, the residual amount
+of INR 24,50,000 is under negotiation. The legal notice from DRT has been
+acknowledged. The promoter has provided a personal guarantee for settlement.
+
+SECTION 5: RELATED PARTY TRANSACTIONS
+───────────────────────────────────────
+
+As per Ind AS 24 – Related Party Disclosures (FY 2022-23)
+
+Nature of Relationship:
+  Sus Metals & Alloys Private Ltd  – Common beneficial ownership / directorship
+  Ashwin Trading Company           – Related by association (promoter family)
+  Ramesh Holdings Pvt Ltd          – Promoter group company
+
+Transactions during the year:
+                                       Sus Metals      Ashwin Trading
+                                         (INR)            (INR)
+  Sales of goods                     12,45,00,000      8,70,00,000
+  Purchase of goods                   9,83,00,000      6,25,00,000
+  Outstanding receivable (31-Mar)     3,85,00,000      2,40,00,000
+  Outstanding payable (31-Mar)        2,91,00,000      1,75,00,000
+
+Management Representation: The Company's management has confirmed that all related
+party transactions are conducted at arm's length and on commercial terms. However,
+the auditors were unable to independently verify the arm's length nature of these
+transactions given the absence of independent comparable pricing data.
+
+SECTION 6: SUBSEQUENT EVENTS
+──────────────────────────────
+
+POST BALANCE SHEET DATE (EVENTS SUBSEQUENT TO 31-MAR-2023):
+
+1. The Company applied for a fresh Working Capital Term Loan of INR 8 Crore
+   from Union Bank of India on 22nd June 2023.
+
+2. A cheque bounce notice was received from M/s Kalyani Steel Traders on
+   15th May 2023 for a cheque of INR 8,50,000 drawn on the Company's current
+   account that was dishonoured on 12th May 2023. The matter was regularised
+   with fresh payment on 18th May 2023.
+
+3. The moratorium requested by the Company on its HDFC Bank term loan
+   (for two months, May and June 2023) was under consideration as at the
+   date of approval of these financial statements.
+
+──────────────────────────────────────────────────────────────────
+This document is an extract provided for credit appraisal purposes only.
+The complete Audited Annual Report is available with the Company Secretary.
+Prepared by: Finance Department, Ramesh Steel & Fabrications Pvt Ltd
+Date of Preparation: 25th September 2023
+──────────────────────────────────────────────────────────────────

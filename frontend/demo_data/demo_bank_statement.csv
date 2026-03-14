@@ -1,0 +1,71 @@
+date,description,cheque_number,debit,credit,balance,transaction_type,counterparty
+2023-04-01,Opening Balance - FY 2023-24,,,,1250000,Opening Balance,
+2023-04-07,NEFT-IN/INFRABUILD/INV-RSF-001/Apr,,, 280000,1530000,NEFT Credit,Infra Build Gujarat Pvt Ltd
+2023-04-15,SAL/APR23/RAMESH STEEL - Salary Disbursement,, 280000,,1250000,Salary,Staff Accounts
+2023-04-22,LIC/HDFC/WCTL/EMI-APR23 - Loan EMI Payment,, 45000,,1205000,Loan Repayment,HDFC Bank Ltd
+2023-04-27,ELEC/MSEDCL/APR23 - Electricity Bill Bhiwandi Factory,, 18500,,1186500,Utility,MSEDCL
+2023-05-03,NEFT-IN/INFRABLD/INV-RSF-004/May,,, 150000,1336500,NEFT Credit,Infra Build Gujarat Pvt Ltd
+2023-05-15,SAL/MAY23/RAMESH STEEL - Salary Disbursement,, 280000,,1056500,Salary,Staff Accounts
+2023-05-19,NEFT-IN/BANGSTL/INV-RSF-004B/May,,, 195000,1251500,NEFT Credit,Bangalore Steel Industries Limited
+2023-05-26,SUPP/RAWMAT/KALYANI-STEEL/May - Raw Material Purchase,, 185000,,1066500,Supplier Payment,Kalyani Steel Traders
+2023-05-31,LIC/HDFC/WCTL/EMI-MAY23 - Loan EMI Payment,, 45000,,1021500,Loan Repayment,HDFC Bank Ltd
+2023-06-08,RTGS-IN/GLOBALSTL/INV-RSF-002/Jun,,, 350000,1371500,RTGS Credit,Global Steel Corp Private Limited
+2023-06-15,SAL/JUN23/RAMESH STEEL - Salary Disbursement,, 280000,,1091500,Salary,Staff Accounts
+2023-06-19,NEFT-IN/CHENNAI-MET/INV-RSF-003/Jun,,, 95000,1186500,NEFT Credit,Chennai Metal Works Limited
+2023-06-24,GST/CBIC/Q1-2324 - GST Payment Q1 FY24,, 150000,,1036500,Tax Payment,CBIC GST
+2023-06-30,LIC/HDFC/WCTL/EMI-JUN23 - Loan EMI Payment,, 45000,,991500,Loan Repayment,HDFC Bank Ltd
+2023-06-30,RENT/BHIWANDI-PREMISES/JUN23 - Factory Rent,, 22500,,969000,Rent,Bhiwandi Property Trust
+2023-07-08,RTGS-IN/RAJMET/INV-RSF-006/Jul,,, 220000,1189000,RTGS Credit,Rajasthan Metal Suppliers Pvt Ltd
+2023-07-15,SAL/JUL23/RAMESH STEEL - Salary Disbursement,, 280000,,909000,Salary,Staff Accounts
+2023-07-22,GST/CBIC/SLF-ASMT-Q1 - GST Self Assessment Demand Q1,, 250000,,659000,Tax Payment,CBIC GST
+2023-07-31,LIC/HDFC/WCTL/EMI-JUL23 - Loan EMI Payment,, 45000,,614000,Loan Repayment,HDFC Bank Ltd
+2023-07-31,MISC/OFFEXP/JUL23 - Office & Administrative Expenses,, 48500,,565500,Administrative,Misc Vendors
+2023-08-06,NEFT-IN/NASHIKEN/INV-RSF-007/Aug,,, 175000,740500,NEFT Credit,Nashik Engineering Works Pvt Ltd
+2023-08-12,RTGS-IN/BANGSTL/INV-RSF-016B/Aug,,, 245000,985500,RTGS Credit,Bangalore Steel Industries Limited
+2023-08-15,SAL/AUG23/RAMESH STEEL - Salary Disbursement,, 280000,,705500,Salary,Staff Accounts
+2023-08-22,LIC/HDFC/WCTL/EMI-AUG23 - Loan EMI Payment,, 45000,,660500,Loan Repayment,HDFC Bank Ltd
+2023-08-25,SUPP/RAWMAT/JINDAL-MET/Aug - Raw Material Procurement,, 95000,,565500,Supplier Payment,Jindal Metal Suppliers
+2023-08-31,RENT/BHIWANDI-PREMISES/AUG23 - Factory Rent,, 22500,,543000,Rent,Bhiwandi Property Trust
+2023-09-05,NEFT-IN/INFRABLD/INV-RSF-009B/Sep,,, 280000,823000,NEFT Credit,Infra Build Gujarat Pvt Ltd
+2023-09-15,SAL/SEP23/RAMESH STEEL - Salary Disbursement,, 280000,,543000,Salary,Staff Accounts
+2023-09-27,LIC/HDFC/WCTL/EMI-SEP23 - Loan EMI Payment,, 45000,,498000,Loan Repayment,HDFC Bank Ltd
+2023-10-04,NEFT-IN/GLOBALSTL/INV-RSF-008B/Oct,,, 130000,628000,NEFT Credit,Global Steel Corp Private Limited
+2023-10-10,RTGS-IN/BANGSTL/INV-RSF-016C/Oct,,, 390000,1018000,RTGS Credit,Bangalore Steel Industries Limited
+2023-10-15,SAL/OCT23/RAMESH STEEL - Salary Disbursement,, 280000,,738000,Salary,Staff Accounts
+2023-10-21,GST/CBIC/Q2-2324 - GST Payment Q2 FY24,, 175000,,563000,Tax Payment,CBIC GST
+2023-10-28,LIC/HDFC/WCTL/EMI-OCT23 - Loan EMI Payment,, 45000,,518000,Loan Repayment,HDFC Bank Ltd
+2023-10-31,MISC/VEHICLE/OCT23 - Vehicle Maintenance & Repair,, 35000,,483000,Administrative,Misc Vendors
+2023-11-06,RTGS-IN/INFRABLD/INV-RSF-018B/Nov,,, 420000,903000,RTGS Credit,Infra Build Gujarat Pvt Ltd
+2023-11-15,SAL/NOV23/RAMESH STEEL - Salary Disbursement,, 280000,,623000,Salary,Staff Accounts
+2023-11-20,SUPP/RAWMAT/TATA-SPONGE/Nov - Sponge Iron Purchase,, 225000,,398000,Supplier Payment,Tata Sponge Iron Ltd
+2023-11-27,LIC/HDFC/WCTL/EMI-NOV23 - Loan EMI Payment,, 45000,,353000,Loan Repayment,HDFC Bank Ltd
+2023-11-30,RENT/BHIWANDI-PREMISES/NOV23 - Factory Rent,, 22500,,330500,Rent,Bhiwandi Property Trust
+2023-12-07,NEFT-IN/GLOBALSTL/INV-RSF-021B/Dec,,, 140000,470500,NEFT Credit,Global Steel Corp Private Limited
+2023-12-12,NEFT-IN/CHENNAI-MET/INV-RSF-011B/Dec,,, 85000,555500,NEFT Credit,Chennai Metal Works Limited
+2023-12-15,SAL/DEC23/RAMESH STEEL - Salary Disbursement,, 280000,,275500,Salary,Staff Accounts
+2023-12-22,LIC/HDFC/WCTL/EMI-DEC23 - Loan EMI Payment,, 45000,,230500,Loan Repayment,HDFC Bank Ltd
+2023-12-29,AUDIT/CA-FEE/DEC23 - Audit & Professional Charges,, 115000,,115500,Professional Fee,S K & Associates CA Firm
+2024-01-06,NEFT-IN/RAJMET/INV-RSF-015B/Jan,,, 185000,300500,NEFT Credit,Rajasthan Metal Suppliers Pvt Ltd
+2024-01-12,RTGS-IN/RAJMET/INV-RSF-031B/Jan,,, 310000,610500,RTGS Credit,Rajasthan Metal Suppliers Pvt Ltd
+2024-01-15,INT/CD/SBI-FD-123/Jan23 - FD Interest Credit,,, 18500,629000,Interest,State Bank of India FD
+2024-01-15,SAL/JAN24/RAMESH STEEL - Salary Disbursement,, 280000,,349000,Salary,Staff Accounts
+2024-01-22,GST/CBIC/Q3-2324 - GST Payment Q3 FY24,, 165000,,184000,Tax Payment,CBIC GST
+2024-01-31,LIC/HDFC/WCTL/EMI-JAN24 - Loan EMI Payment,, 45000,,139000,Loan Repayment,HDFC Bank Ltd
+2024-02-03,NEFT-IN/MISC-CUST1/Feb,,, 65000,204000,NEFT Credit,Miscellaneous Customer A
+2024-02-08,RTGS-IN/GLOBALSTL/INV-RSF-030B/Feb,,, 195000,399000,RTGS Credit,Global Steel Corp Private Limited
+2024-02-14,NEFT-IN/MISC-CUST2/Feb,,, 90000,489000,NEFT Credit,Miscellaneous Customer B
+2024-02-15,SAL/FEB24/RAMESH STEEL - Salary Disbursement,, 280000,,209000,Salary,Staff Accounts
+2024-02-22,RENT/BHIWANDI-PREMISES/FEB24 - Factory Rent,, 22500,,186500,Rent,Bhiwandi Property Trust
+2024-02-28,LIC/HDFC/WCTL/EMI-FEB24 - Loan EMI Payment,, 45000,,141500,Loan Repayment,HDFC Bank Ltd
+2024-02-29,INS/POLICY/BAJAJ-ALLIANZ/FEB24 - Factory Insurance Premium,, 78000,,63500,Insurance,Bajaj Allianz General Insurance
+2024-03-04,RTGS-IN/INFRABLD/INV-RSF-032B/Mar,,, 160000,223500,RTGS Credit,Infra Build Gujarat Pvt Ltd
+2024-03-07,NEFT-IN/CHENNAI-MET/INV-RSF-031C/Mar,,, 245000,468500,NEFT Credit,Chennai Metal Works Limited
+2024-03-11,NEFT-IN/GLOBALSTL/INV-RSF-021C/Mar,,, 175000,643500,NEFT Credit,Global Steel Corp Private Limited
+2024-03-15,NEFT-IN/CHENNAI-MET/INV-RSF-033B/Mar,,, 110000,753500,NEFT Credit,Chennai Metal Works Limited
+2024-03-15,SAL/MAR24/RAMESH STEEL - Salary Disbursement,, 280000,,473500,Salary,Staff Accounts
+2024-03-19,NEFT-IN/RAJMET/INV-RSF-015C/Mar,,, 145000,618500,NEFT Credit,Rajasthan Metal Suppliers Pvt Ltd
+2024-03-22,GST/CBIC/ANNL-2324 - GST Annual Settlement FY24,, 250000,,368500,Tax Payment,CBIC GST
+2024-03-25,LIC/HDFC/WCTL/EMI-MAR24 - Loan EMI Payment,, 45000,,323500,Loan Repayment,HDFC Bank Ltd
+2024-03-28,RENT/BHIWANDI-PREMISES/MAR24 - Factory Rent,, 22500,,301000,Rent,Bhiwandi Property Trust
+2024-03-29,SUPP/SETTLE/AAR-ENTERPRISES/Mar24 - Supplier Settlement,, 175000,,126000,Supplier Payment,Aar Enterprises Maharashtra
+2024-03-31,STAT/CHARGES/ROC-FILING/Mar24 - ROC Filing & Statutory Fees,, 55000,,71000,Statutory,Ministry of Corporate Affairs
