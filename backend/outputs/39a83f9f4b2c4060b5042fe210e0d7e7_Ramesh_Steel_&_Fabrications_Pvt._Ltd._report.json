@@ -1,0 +1,103 @@
+{
+  "entity_profile": {
+    "company_name": "Ramesh Steel & Fabrications Pvt. Ltd.",
+    "cin": "U27100MH2011PTC218847",
+    "pan": "AABCR1234F",
+    "sector": "Manufacturing",
+    "turnover": "INR 48 Crore"
+  },
+  "loan_details": {
+    "loan_type": "Term Loan",
+    "loan_amount": "8 Crore",
+    "tenure": "5 years",
+    "interest_rate": "11.25% p.a."
+  },
+  "financial_analysis": {
+    "financial_commitments": {
+      "loan_amount": "8 crore",
+      "lender": "borrowings to fund operations. As at",
+      "sanction_limit": "10,00,00,000",
+      "contingent_liabilities": "22",
+      "legal_cases": "by M/s Mehta Alloys Pvt Ltd:",
+      "guarantees": "outstanding as at 31-Mar-2023:",
+      "risk_flags": [
+        "npa",
+        "winding up",
+        "debt recovery tribunal",
+        "arbitration",
+        "overdue",
+        "legal notice",
+        "drt",
+        "cheque bounce",
+        "moratorium",
+        "default",
+        "non-performing"
+      ]
+    },
+    "gst_analysis": {
+      "total_invoice_value": 47950000.0,
+      "invoice_count": 42,
+      "unique_buyers": 14,
+      "top_buyers": [
+        {
+          "gstin": "27AAFCS5555K1Z9",
+          "total_value": 7095000.0
+        },
+        {
+          "gstin": "33AACCM9617P1ZA",
+          "total_value": 5240000.0
+        },
+        {
+          "gstin": "07AABCG7892F1ZX",
+          "total_value": 4550000.0
+        },
+        {
+          "gstin": "24AAACI4453Q1Z8",
+          "total_value": 4305000.0
+        },
+        {
+          "gstin": "29AACCS4520E1ZP",
+          "total_value": 3525000.0
+        }
+      ],
+      "unique_sellers": 4
+    },
+    "bank_analysis": {
+      "total_credit_inflow": 4853500.0,
+      "total_debit_outflow": 6032500.0,
+      "net_flow": -1179000.0,
+      "transaction_count": 69
+    },
+    "fraud_flags": [
+      {
+        "flag": "REVENUE_INFLATION",
+        "description": "GST declared revenue (47,950,000.00) is 9.9x the actual bank credit inflow (4,853,500.00). Possible revenue inflation.",
+        "gst_revenue": 47950000.0,
+        "bank_inflow": 4853500.0,
+        "ratio": 9.88
+      },
+      {
+        "flag": "CIRCULAR_TRADING",
+        "description": "Detected 2 short transaction cycle(s) among GSTINs. This may indicate circular/round-tripping trade to inflate revenue.",
+        "cycle_count": 2,
+        "sample_cycles": [
+          [
+            "27AAFCS5555K1Z9",
+            "27AADCS6666M1Z8",
+            "27AABCR1234F1Z5"
+          ],
+          [
+            "27AAFCS5555K1Z9",
+            "27AADCS6666M1Z8",
+            "27AABCR1234F1Z5",
+            "29AAEPS8888Q1Z6"
+          ]
+        ],
+        "total_nodes": 14,
+        "total_edges": 15
+      }
+    ],
+    "risk_score": 100,
+    "risk_level": "High"
+  }
+}
