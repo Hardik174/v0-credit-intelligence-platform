@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * app/onboarding/page.tsx
@@ -10,22 +10,22 @@
  *            → redirects to /results
  */
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from "@/components/ui/select";
 import {
   Building2,
   CreditCard,
@@ -34,22 +34,22 @@ import {
   Loader2,
   AlertCircle,
   FileSearch,
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { createEntitySession } from '@/lib/ingestor-api';
-import { useSessionStore } from '@/store/sessionStore';
-import { DocumentUploader } from '@/components/DocumentUploader';
-import { SECTORS, LOAN_TYPES } from '@/lib/constants';
-import { EntityOnboardPayload } from '@/types/analysis';
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { createEntitySession } from "@/lib/ingestor-api";
+import { useSessionStore } from "@/store/sessionStore";
+import { DocumentUploader } from "@/components/DocumentUploader";
+import { SECTORS, LOAN_TYPES } from "@/lib/constants";
+import { EntityOnboardPayload } from "@/types/analysis";
 
 // ---------------------------------------------------------------------------
 // Step indicator
 // ---------------------------------------------------------------------------
 
 const STEPS = [
-  { id: 1, label: 'Entity Details', icon: Building2 },
-  { id: 2, label: 'Upload Documents', icon: FileSearch },
-  { id: 3, label: 'Run Analysis', icon: CreditCard },
+  { id: 1, label: "Entity Details", icon: Building2 },
+  { id: 2, label: "Upload Documents", icon: FileSearch },
+  { id: 3, label: "Run Analysis", icon: CreditCard },
 ] as const;
 
 function StepIndicator({ current }: { current: number }) {
@@ -64,12 +64,12 @@ function StepIndicator({ current }: { current: number }) {
             <div className="flex flex-col items-center gap-1.5">
               <div
                 className={cn(
-                  'w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all',
+                  "w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all",
                   done
-                    ? 'bg-green-500 border-green-500 text-white'
+                    ? "bg-green-500 border-green-500 text-white"
                     : active
-                    ? 'bg-blue-600 border-blue-600 text-white'
-                    : 'bg-white border-gray-300 text-gray-400'
+                      ? "bg-blue-600 border-blue-600 text-white"
+                      : "bg-white border-gray-300 text-gray-400",
                 )}
               >
                 {done ? (
@@ -80,8 +80,12 @@ function StepIndicator({ current }: { current: number }) {
               </div>
               <span
                 className={cn(
-                  'text-xs font-medium whitespace-nowrap',
-                  active ? 'text-blue-600' : done ? 'text-green-600' : 'text-gray-400'
+                  "text-xs font-medium whitespace-nowrap",
+                  active
+                    ? "text-blue-600"
+                    : done
+                      ? "text-green-600"
+                      : "text-gray-400",
                 )}
               >
                 {step.label}
@@ -90,8 +94,8 @@ function StepIndicator({ current }: { current: number }) {
             {idx < STEPS.length - 1 && (
               <div
                 className={cn(
-                  'h-0.5 w-24 mx-2 mt-[-18px] transition-all',
-                  done ? 'bg-green-400' : 'bg-gray-200'
+                  "h-0.5 w-24 mx-2 mt-[-18px] transition-all",
+                  done ? "bg-green-400" : "bg-gray-200",
                 )}
               />
             )}
@@ -146,30 +150,30 @@ interface FormState {
 }
 
 const INITIAL_FORM: FormState = {
-  company_name: '',
-  cin: '',
-  pan: '',
-  sector: '',
-  turnover: '',
-  loan_type: '',
-  loan_amount: '',
-  tenure: '',
-  interest_rate: '',
+  company_name: "",
+  cin: "",
+  pan: "",
+  sector: "",
+  turnover: "",
+  loan_type: "",
+  loan_amount: "",
+  tenure: "",
+  interest_rate: "",
 };
 
 function validateForm(f: FormState): Partial<Record<keyof FormState, string>> {
   const e: Partial<Record<keyof FormState, string>> = {};
-  if (!f.company_name.trim()) e.company_name = 'Company name is required';
-  if (!f.cin.trim()) e.cin = 'CIN is required';
-  else if (f.cin.length !== 21) e.cin = 'CIN must be exactly 21 characters';
-  if (!f.pan.trim()) e.pan = 'PAN is required';
-  else if (f.pan.length !== 10) e.pan = 'PAN must be exactly 10 characters';
-  if (!f.sector) e.sector = 'Sector is required';
-  if (!f.turnover.trim()) e.turnover = 'Annual turnover is required';
-  if (!f.loan_type) e.loan_type = 'Loan type is required';
-  if (!f.loan_amount.trim()) e.loan_amount = 'Loan amount is required';
-  if (!f.tenure.trim()) e.tenure = 'Tenure is required';
-  if (!f.interest_rate.trim()) e.interest_rate = 'Interest rate is required';
+  if (!f.company_name.trim()) e.company_name = "Company name is required";
+  if (!f.cin.trim()) e.cin = "CIN is required";
+  else if (f.cin.length !== 21) e.cin = "CIN must be exactly 21 characters";
+  if (!f.pan.trim()) e.pan = "PAN is required";
+  else if (f.pan.length !== 10) e.pan = "PAN must be exactly 10 characters";
+  if (!f.sector) e.sector = "Sector is required";
+  if (!f.turnover.trim()) e.turnover = "Annual turnover is required";
+  if (!f.loan_type) e.loan_type = "Loan type is required";
+  if (!f.loan_amount.trim()) e.loan_amount = "Loan amount is required";
+  if (!f.tenure.trim()) e.tenure = "Tenure is required";
+  if (!f.interest_rate.trim()) e.interest_rate = "Interest rate is required";
   return e;
 }
 
@@ -183,7 +187,9 @@ export default function OnboardingPage() {
 
   const [step, setStep] = useState<1 | 2 | 3>(sessionId ? 2 : 1);
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
-  const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof FormState, string>>
+  >({});
   const [apiError, setApiError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -223,7 +229,9 @@ export default function OnboardingPage() {
       setSessionId(res.session_id);
       setStep(2);
     } catch (err) {
-      setApiError(err instanceof Error ? err.message : 'Failed to create session');
+      setApiError(
+        err instanceof Error ? err.message : "Failed to create session",
+      );
     } finally {
       setSubmitting(false);
     }
@@ -231,7 +239,7 @@ export default function OnboardingPage() {
 
   // Called by DocumentUploader when analysis is complete
   function handleAnalysisDone() {
-    router.push('/results');
+    router.push("/results");
   }
 
   // ---------------------------------------------------------------------------
@@ -242,9 +250,12 @@ export default function OnboardingPage() {
     <div className="max-w-3xl mx-auto space-y-6">
       {/* Page header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Credit Assessment Onboarding</h1>
+        <h1 className="text-3xl font-bold text-gray-900">
+          Credit Assessment Onboarding
+        </h1>
         <p className="text-gray-500 mt-1">
-          Register the entity, upload financial documents, and run the analysis pipeline.
+          Register the entity, upload financial documents, and run the analysis
+          pipeline.
         </p>
       </div>
 
@@ -267,12 +278,16 @@ export default function OnboardingPage() {
                   Company Information
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <Field label="Company Name" error={errors.company_name} required>
+                  <Field
+                    label="Company Name"
+                    error={errors.company_name}
+                    required
+                  >
                     <Input
                       placeholder="Ramesh Steel & Fabrications Pvt Ltd"
                       value={form.company_name}
-                      onChange={(e) => setField('company_name', e.target.value)}
-                      className={cn(errors.company_name && 'border-red-400')}
+                      onChange={(e) => setField("company_name", e.target.value)}
+                      className={cn(errors.company_name && "border-red-400")}
                     />
                   </Field>
                   <Field label="CIN" error={errors.cin} required>
@@ -280,8 +295,10 @@ export default function OnboardingPage() {
                       placeholder="U27100MH2011PTC218847"
                       maxLength={21}
                       value={form.cin}
-                      onChange={(e) => setField('cin', e.target.value.toUpperCase())}
-                      className={cn(errors.cin && 'border-red-400')}
+                      onChange={(e) =>
+                        setField("cin", e.target.value.toUpperCase())
+                      }
+                      className={cn(errors.cin && "border-red-400")}
                     />
                   </Field>
                   <Field label="PAN" error={errors.pan} required>
@@ -289,16 +306,20 @@ export default function OnboardingPage() {
                       placeholder="AABCR1234F"
                       maxLength={10}
                       value={form.pan}
-                      onChange={(e) => setField('pan', e.target.value.toUpperCase())}
-                      className={cn(errors.pan && 'border-red-400')}
+                      onChange={(e) =>
+                        setField("pan", e.target.value.toUpperCase())
+                      }
+                      className={cn(errors.pan && "border-red-400")}
                     />
                   </Field>
                   <Field label="Sector" error={errors.sector} required>
                     <Select
                       value={form.sector}
-                      onValueChange={(v) => setField('sector', v)}
+                      onValueChange={(v) => setField("sector", v)}
                     >
-                      <SelectTrigger className={cn(errors.sector && 'border-red-400')}>
+                      <SelectTrigger
+                        className={cn(errors.sector && "border-red-400")}
+                      >
                         <SelectValue placeholder="Select sector" />
                       </SelectTrigger>
                       <SelectContent>
@@ -310,12 +331,16 @@ export default function OnboardingPage() {
                       </SelectContent>
                     </Select>
                   </Field>
-                  <Field label="Annual Turnover" error={errors.turnover} required>
+                  <Field
+                    label="Annual Turnover"
+                    error={errors.turnover}
+                    required
+                  >
                     <Input
                       placeholder="e.g. INR 48.5 Crore"
                       value={form.turnover}
-                      onChange={(e) => setField('turnover', e.target.value)}
-                      className={cn(errors.turnover && 'border-red-400')}
+                      onChange={(e) => setField("turnover", e.target.value)}
+                      className={cn(errors.turnover && "border-red-400")}
                     />
                   </Field>
                 </div>
@@ -332,9 +357,11 @@ export default function OnboardingPage() {
                   <Field label="Loan Type" error={errors.loan_type} required>
                     <Select
                       value={form.loan_type}
-                      onValueChange={(v) => setField('loan_type', v)}
+                      onValueChange={(v) => setField("loan_type", v)}
                     >
-                      <SelectTrigger className={cn(errors.loan_type && 'border-red-400')}>
+                      <SelectTrigger
+                        className={cn(errors.loan_type && "border-red-400")}
+                      >
                         <SelectValue placeholder="Select loan type" />
                       </SelectTrigger>
                       <SelectContent>
@@ -346,28 +373,38 @@ export default function OnboardingPage() {
                       </SelectContent>
                     </Select>
                   </Field>
-                  <Field label="Loan Amount" error={errors.loan_amount} required>
+                  <Field
+                    label="Loan Amount"
+                    error={errors.loan_amount}
+                    required
+                  >
                     <Input
                       placeholder="e.g. INR 8 Crore"
                       value={form.loan_amount}
-                      onChange={(e) => setField('loan_amount', e.target.value)}
-                      className={cn(errors.loan_amount && 'border-red-400')}
+                      onChange={(e) => setField("loan_amount", e.target.value)}
+                      className={cn(errors.loan_amount && "border-red-400")}
                     />
                   </Field>
                   <Field label="Tenure" error={errors.tenure} required>
                     <Input
                       placeholder="e.g. 5 years"
                       value={form.tenure}
-                      onChange={(e) => setField('tenure', e.target.value)}
-                      className={cn(errors.tenure && 'border-red-400')}
+                      onChange={(e) => setField("tenure", e.target.value)}
+                      className={cn(errors.tenure && "border-red-400")}
                     />
                   </Field>
-                  <Field label="Interest Rate" error={errors.interest_rate} required>
+                  <Field
+                    label="Interest Rate"
+                    error={errors.interest_rate}
+                    required
+                  >
                     <Input
                       placeholder="e.g. 11.25% p.a."
                       value={form.interest_rate}
-                      onChange={(e) => setField('interest_rate', e.target.value)}
-                      className={cn(errors.interest_rate && 'border-red-400')}
+                      onChange={(e) =>
+                        setField("interest_rate", e.target.value)
+                      }
+                      className={cn(errors.interest_rate && "border-red-400")}
                     />
                   </Field>
                 </div>
@@ -423,7 +460,10 @@ export default function OnboardingPage() {
           </div>
 
           {/* Document uploader handles steps 2 → 3 internally */}
-          <DocumentUploader sessionId={sessionId} onAnalysisComplete={handleAnalysisDone} />
+          <DocumentUploader
+            sessionId={sessionId}
+            onAnalysisComplete={handleAnalysisDone}
+          />
         </>
       )}
     </div>

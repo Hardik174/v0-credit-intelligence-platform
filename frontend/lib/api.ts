@@ -1,6 +1,6 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
   ? `${process.env.NEXT_PUBLIC_API_URL}/api`
-  : (process.env.NEXT_PUBLIC_API_BASE || '/api');
+  : (process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:8000/api');
 
 class ApiClient {
   private baseUrl: string;
@@ -103,6 +103,11 @@ class ApiClient {
     return this.request(`/research/${sessionId}`);
   }
 
+  async getResearchInsightsByCompany(companyName: string, sector = 'General') {
+    const encoded = encodeURIComponent(companyName);
+    return this.request(`/research-insights/${encoded}?sector=${encodeURIComponent(sector)}`);
+  }
+
   // Risk APIs
   async getRiskAnalysis(sessionId: string) {
     return this.request(`/risk-analysis/${sessionId}`);
@@ -118,6 +123,41 @@ class ApiClient {
 
   async getCAM(entityId: string) {
     return this.request(`/cam?entityId=${entityId}`);
+  }
+
+  /** Standalone company CAM – no pipeline session required. */
+  async getCAMReport(company: string, sector = 'General') {
+    const encoded = encodeURIComponent(company);
+    return this.request(`/cam-report/${encoded}?sector=${encodeURIComponent(sector)}`);
+  }
+
+  /** PDF download URL for standalone company CAM. */
+  getCAMDownloadUrl(company: string): string {
+    return `${this.baseUrl}/cam-report/${encodeURIComponent(company)}/download`;
+  }
+
+  /**
+   * Download CAM report as PDF.
+   *
+   * Accepts either a pipeline session ID or a company name — the backend
+   * tries the session first and falls back to a standalone company CAM.
+   * Triggers a browser file-save dialogue via a temporary object URL.
+   */
+  async downloadCAM(id: string): Promise<void> {
+    const url = `${this.baseUrl}/cam-report/${encodeURIComponent(id)}/download`;
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error(`PDF download failed: ${res.status} ${res.statusText}`);
+    }
+    const blob = await res.blob();
+    const objectUrl = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = objectUrl;
+    a.download = `CAM_Report_${id.slice(0, 30)}.pdf`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(objectUrl);
   }
 
   async updateCAMSection(camId: string, sectionId: string, content: string) {

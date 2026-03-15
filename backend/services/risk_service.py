@@ -87,10 +87,23 @@ def calculate_risk(session_id: str):
     ai_reasoning = "Risk calculated based on financial extraction and fraud detection models."
     if fraud_flags:
         ai_reasoning += f" Detected {len(fraud_flags)} fraud flags."
-        
+
+    # Correct risk classification: low score = low risk (green), high score = high risk (red)
+    if overall_score <= 30:
+        risk_level = "Low"
+        risk_color = "green"
+    elif overall_score <= 60:
+        risk_level = "Moderate"
+        risk_color = "yellow"
+    else:
+        risk_level = "High"
+        risk_color = "red"
+
     return {
         "entityId": session_id,
         "overallScore": overall_score,
+        "riskLevel": risk_level,
+        "riskColor": risk_color,
         "categories": categories,
         "keyIndicators": key_indicators,
         "aiReasoning": ai_reasoning,

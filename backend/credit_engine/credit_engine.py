@@ -4,7 +4,9 @@ def compute_credit_decision(research_output):
     reasoning = []
 
     negative_news = research_output["risk_signals"]["negative_news"]
-    litigation_cases = len(research_output["risk_signals"]["litigation_cases"])
+    # litigation_cases may be an int count OR a list of case dicts
+    _raw_lit = research_output["risk_signals"]["litigation_cases"]
+    litigation_cases = len(_raw_lit) if isinstance(_raw_lit, list) else int(_raw_lit or 0)
     sector_risk = research_output["risk_signals"]["sector_risk"]
 
     if negative_news > 3:

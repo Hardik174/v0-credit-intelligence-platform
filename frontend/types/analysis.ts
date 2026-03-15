@@ -147,3 +147,32 @@ export interface FullAnalysisResponse {
   loan_details: ApiLoanDetails;
   financial_analysis: FinancialAnalysis;
 }
+
+// ---------------------------------------------------------------------------
+// CAM Report response – returned by /generate-cam-report/{session_id}
+// ---------------------------------------------------------------------------
+
+export interface CAMSwotAnalysis {
+  strengths: string[];
+  weaknesses: string[];
+  opportunities: string[];
+  threats: string[];
+}
+
+export interface CAMReportResponse {
+  session_id: string;
+  generated_at: string;
+  entity_profile: ApiEntityProfile;
+  loan_details: ApiLoanDetails;
+  financial_summary: {
+    gst_analysis: GSTAnalysis;
+    bank_analysis: BankAnalysis;
+    financial_commitments: FinancialCommitments;
+  };
+  fraud_signals: FraudFlag[];
+  research_insights: Record<string, unknown>;
+  risk_score: number;
+  risk_level: RiskLevel;
+  swot_analysis: CAMSwotAnalysis;
+  recommendation: string;
+}

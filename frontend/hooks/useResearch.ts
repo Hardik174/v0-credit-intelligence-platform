@@ -93,44 +93,59 @@ import { useState, useEffect } from "react";
 import { api } from "@/lib/api";
 import { ResearchInsight, SectorTrend, MacroIndicator } from "@/types/research";
 
-export function useResearch(sessionId?: string) {
+/**
+ * useResearch – fetch research insights for either:
+ *   a) A pipeline session  (sessionId provided)  → GET /api/research/{sessionId}
+ *   b) A company name      (companyName provided) → GET /api/research-insights/{company}
+ *
+ * When neither is provided, loading is set to false immediately so the
+ * page renders the empty/prompt state rather than spinning forever.
+ */
+export function useResearch(sessionId?: string, companyName?: string) {
 
   const [insights, setInsights] = useState<ResearchInsight[]>([]);
   const [sectorTrends, setSectorTrends] = useState<SectorTrend[]>([]);
   const [macroIndicators, setMacroIndicators] = useState<MacroIndicator[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
 
-    if (!sessionId) return;
+    // Nothing to fetch — stop spinning immediately
+    if (!sessionId && !companyName) {
+      setIsLoading(false);
+      return;
+    }
 
     const fetchResearch = async () => {
-
       try {
-
         setIsLoading(true);
+        setError(null);
 
-        const data = await api.getResearchInsights(sessionId);
+        let data: any;
+
+        if (sessionId) {
+          data = await api.getResearchInsights(sessionId);
+        } else {
+          data = await api.getResearchInsightsByCompany(companyName!);
+        }
 
         setInsights(data.latest_research || []);
         setSectorTrends(data.sector_trends || []);
         setMacroIndicators(data.macro_indicators || []);
 
-      } catch (error) {
-
-        console.error("Research API error", error);
-
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : "Research API error";
+        console.error("Research API error", err);
+        setError(msg);
       } finally {
-
         setIsLoading(false);
-
       }
-
     };
 
     fetchResearch();
 
-  }, [sessionId]);
+  }, [sessionId, companyName]);
 
-  return { insights, sectorTrends, macroIndicators, isLoading };
+  return { insights, sectorTrends, macroIndicators, isLoading, error };
 }

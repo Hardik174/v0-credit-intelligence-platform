@@ -1,6 +1,8 @@
 export interface RiskAnalysis {
   entityId: string;
   overallScore: number;
+  riskLevel?: 'Low' | 'Moderate' | 'High';
+  riskColor?: 'green' | 'yellow' | 'red';
   categories: RiskCategory[];
   keyIndicators: RiskIndicator[];
   aiReasoning: string;

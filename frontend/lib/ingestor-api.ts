@@ -12,9 +12,11 @@
  *   classifyDocuments    → POST /classify-documents/{sessionId}
  *   extractData          → POST /extract-data/{sessionId}
  *   getFinancialAnalysis → GET  /financial-analysis/{sessionId}
+ *   getCAMReport         → GET  /generate-cam-report/{sessionId}
  */
 
 import {
+  CAMReportResponse,
   ClassifyDocumentsResponse,
   EntityOnboardPayload,
   FullAnalysisResponse,
@@ -22,9 +24,13 @@ import {
   UploadDocumentsResponse,
 } from '@/types/analysis';
 
-const INGESTOR_BASE_URL = process.env.NEXT_PUBLIC_API_URL
-  ? `${process.env.NEXT_PUBLIC_API_URL}/api/ingestor`
-  : (process.env.NEXT_PUBLIC_INGESTOR_URL || '/api/ingestor');
+// Backend root URL: never appends /api/ingestor because all stage endpoints
+// live at the root level (e.g. /entity-onboard, /generate-cam-report/{id}).
+// NEXT_PUBLIC_API_URL should NOT be used here — it points to the /api prefix
+// used by the older api.ts client. Use NEXT_PUBLIC_INGESTOR_URL instead.
+const INGESTOR_BASE_URL =
+  process.env.NEXT_PUBLIC_INGESTOR_URL ||
+  'http://localhost:8000';
 
 // ---------------------------------------------------------------------------
 // Internal error handler
@@ -147,4 +153,20 @@ export async function getFinancialAnalysis(
     `${INGESTOR_BASE_URL}/financial-analysis/${sessionId}`
   );
   return handleResponse<FullAnalysisResponse>(res);
+}
+
+// ---------------------------------------------------------------------------
+// CAM Report
+// ---------------------------------------------------------------------------
+
+/**
+ * Generate (or retrieve cached) CAM report for a completed session.
+ * Runs Research Agent + SWOT + Recommendation internally.
+ * Returns 400 if extraction has not been completed.
+ */
+export async function getCAMReport(sessionId: string): Promise<CAMReportResponse> {
+  const res = await fetch(
+    `${INGESTOR_BASE_URL}/generate-cam-report/${encodeURIComponent(sessionId)}`
+  );
+  return handleResponse<CAMReportResponse>(res);
 }

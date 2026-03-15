@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * app/results/page.tsx
@@ -15,13 +15,13 @@
  *   6. Financial Commitments
  */
 
-import React from 'react';
-import { useRouter } from 'next/navigation';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import React from "react";
+import { useRouter } from "next/navigation";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   Building2,
   CreditCard,
@@ -35,10 +35,10 @@ import {
   ShieldCheck,
   BarChart3,
   RefreshCcw,
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { useSessionStore } from '@/store/sessionStore';
-import type { FraudFlag, RiskLevel } from '@/types/analysis';
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useSessionStore } from "@/store/sessionStore";
+import type { FraudFlag, RiskLevel } from "@/types/analysis";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -53,38 +53,46 @@ function formatNumber(n: number): string {
 
 function riskColor(level: RiskLevel) {
   switch (level) {
-    case 'Low':      return 'text-green-700 bg-green-50 border-green-200';
-    case 'Moderate': return 'text-yellow-700 bg-yellow-50 border-yellow-200';
-    case 'High':     return 'text-red-700 bg-red-50 border-red-200';
+    case "Low":
+      return "text-green-700 bg-green-50 border-green-200";
+    case "Moderate":
+      return "text-yellow-700 bg-yellow-50 border-yellow-200";
+    case "High":
+      return "text-red-700 bg-red-50 border-red-200";
   }
 }
 
 function riskScoreColor(score: number) {
-  if (score <= 30) return 'text-green-600';
-  if (score <= 60) return 'text-yellow-600';
-  return 'text-red-600';
+  if (score <= 30) return "text-green-600";
+  if (score <= 60) return "text-yellow-600";
+  return "text-red-600";
 }
 
 function riskBarColor(score: number) {
-  if (score <= 30) return 'bg-green-500';
-  if (score <= 60) return 'bg-yellow-500';
-  return 'bg-red-500';
+  if (score <= 30) return "bg-green-500";
+  if (score <= 60) return "bg-yellow-500";
+  return "bg-red-500";
 }
 
 function fraudFlagIcon(flag: string | undefined) {
-  const f = flag ?? '';
-  if (f.includes('INFLATION'))    return <TrendingUp className="w-4 h-4 text-orange-500" />;
-  if (f.includes('CIRCULAR'))     return <RefreshCcw className="w-4 h-4 text-red-500" />;
-  if (f.includes('DENSE'))        return <BarChart3 className="w-4 h-4 text-purple-500" />;
+  const f = flag ?? "";
+  if (f.includes("INFLATION"))
+    return <TrendingUp className="w-4 h-4 text-orange-500" />;
+  if (f.includes("CIRCULAR"))
+    return <RefreshCcw className="w-4 h-4 text-red-500" />;
+  if (f.includes("DENSE"))
+    return <BarChart3 className="w-4 h-4 text-purple-500" />;
   return <AlertTriangle className="w-4 h-4 text-yellow-500" />;
 }
 
 function fraudFlagBadgeClass(flag: string | undefined) {
-  const f = flag ?? '';
-  if (f.includes('INFLATION')) return 'bg-orange-50 text-orange-700 border-orange-200';
-  if (f.includes('CIRCULAR'))  return 'bg-red-50 text-red-700 border-red-200';
-  if (f.includes('DENSE'))     return 'bg-purple-50 text-purple-700 border-purple-200';
-  return 'bg-yellow-50 text-yellow-700 border-yellow-200';
+  const f = flag ?? "";
+  if (f.includes("INFLATION"))
+    return "bg-orange-50 text-orange-700 border-orange-200";
+  if (f.includes("CIRCULAR")) return "bg-red-50 text-red-700 border-red-200";
+  if (f.includes("DENSE"))
+    return "bg-purple-50 text-purple-700 border-purple-200";
+  return "bg-yellow-50 text-yellow-700 border-yellow-200";
 }
 
 // ---------------------------------------------------------------------------
@@ -115,29 +123,29 @@ function MetricCard({
 }
 
 function FraudFlagCard({ ff }: { ff: FraudFlag }) {
-  const flagStr = ff.flag ?? '';
+  const flagStr = ff.flag ?? "";
   return (
     <div
       className={cn(
-        'border rounded-lg p-4 space-y-2',
-        flagStr.includes('INFLATION')
-          ? 'border-orange-200 bg-orange-50'
-          : flagStr.includes('CIRCULAR')
-          ? 'border-red-200 bg-red-50'
-          : flagStr.includes('DENSE')
-          ? 'border-purple-200 bg-purple-50'
-          : 'border-yellow-200 bg-yellow-50'
+        "border rounded-lg p-4 space-y-2",
+        flagStr.includes("INFLATION")
+          ? "border-orange-200 bg-orange-50"
+          : flagStr.includes("CIRCULAR")
+            ? "border-red-200 bg-red-50"
+            : flagStr.includes("DENSE")
+              ? "border-purple-200 bg-purple-50"
+              : "border-yellow-200 bg-yellow-50",
       )}
     >
       <div className="flex items-center gap-2">
         {fraudFlagIcon(flagStr)}
         <span
           className={cn(
-            'text-xs font-semibold px-2 py-0.5 rounded border',
-            fraudFlagBadgeClass(flagStr)
+            "text-xs font-semibold px-2 py-0.5 rounded border",
+            fraudFlagBadgeClass(flagStr),
           )}
         >
-          {flagStr || 'UNKNOWN'}
+          {flagStr || "UNKNOWN"}
         </span>
       </div>
       <p className="text-sm text-gray-700">{ff.description}</p>
@@ -147,15 +155,21 @@ function FraudFlagCard({ ff }: { ff: FraudFlag }) {
         <div className="grid grid-cols-3 gap-2 text-xs mt-1">
           <div className="text-center p-2 bg-white rounded border border-orange-100">
             <p className="text-gray-500">GST Revenue</p>
-            <p className="font-semibold text-gray-800">{formatNumber(ff.gst_revenue ?? 0)}</p>
+            <p className="font-semibold text-gray-800">
+              {formatNumber(ff.gst_revenue ?? 0)}
+            </p>
           </div>
           <div className="text-center p-2 bg-white rounded border border-orange-100">
             <p className="text-gray-500">Bank Inflow</p>
-            <p className="font-semibold text-gray-800">{formatNumber(ff.bank_inflow ?? 0)}</p>
+            <p className="font-semibold text-gray-800">
+              {formatNumber(ff.bank_inflow ?? 0)}
+            </p>
           </div>
           <div className="text-center p-2 bg-white rounded border border-orange-100">
             <p className="text-gray-500">Ratio</p>
-            <p className="font-semibold text-red-700">{ff.ratio != null ? `${ff.ratio.toFixed(2)}x` : '–'}</p>
+            <p className="font-semibold text-red-700">
+              {ff.ratio != null ? `${ff.ratio.toFixed(2)}x` : "–"}
+            </p>
           </div>
         </div>
       )}
@@ -164,15 +178,19 @@ function FraudFlagCard({ ff }: { ff: FraudFlag }) {
       {ff.cycle_count !== undefined && (
         <div className="text-xs space-y-1 mt-1">
           <p className="text-gray-600">
-            <span className="font-medium">{ff.cycle_count}</span> circular trading cycle
-            {ff.cycle_count !== 1 ? 's' : ''} detected.
+            <span className="font-medium">{ff.cycle_count}</span> circular
+            trading cycle
+            {ff.cycle_count !== 1 ? "s" : ""} detected.
           </p>
           {ff.sample_cycles && ff.sample_cycles.length > 0 && (
             <div className="space-y-1">
               <p className="text-gray-500 font-medium">Sample cycles:</p>
               {ff.sample_cycles.slice(0, 3).map((cycle, i) => (
-                <p key={i} className="font-mono bg-white px-2 py-1 rounded border border-red-100 truncate">
-                  {cycle.join(' → ')}
+                <p
+                  key={i}
+                  className="font-mono bg-white px-2 py-1 rounded border border-red-100 truncate"
+                >
+                  {cycle.join(" → ")}
                 </p>
               ))}
             </div>
@@ -185,11 +203,17 @@ function FraudFlagCard({ ff }: { ff: FraudFlag }) {
         <div className="text-xs space-y-1 mt-1">
           <p className="text-gray-500 font-medium">Suspicious groups:</p>
           {ff.groups.slice(0, 3).map((g, i) => (
-            <div key={i} className="bg-white rounded border border-purple-100 px-2 py-1">
-              <p className="truncate">{g.nodes.join(', ')}</p>
+            <div
+              key={i}
+              className="bg-white rounded border border-purple-100 px-2 py-1"
+            >
+              <p className="truncate">{g.nodes.join(", ")}</p>
               <p className="text-gray-400">
-                density: <span className="font-medium text-purple-700">{g.density.toFixed(2)}</span>
-                {' · '}edges: {g.edges}
+                density:{" "}
+                <span className="font-medium text-purple-700">
+                  {g.density.toFixed(2)}
+                </span>
+                {" · "}edges: {g.edges}
               </p>
             </div>
           ))}
@@ -213,10 +237,11 @@ export default function ResultsPage() {
         <Alert>
           <AlertTriangle className="h-4 w-4" />
           <AlertDescription>
-            No analysis results found. Please complete the onboarding pipeline first.
+            No analysis results found. Please complete the onboarding pipeline
+            first.
           </AlertDescription>
         </Alert>
-        <Button variant="outline" onClick={() => router.push('/onboarding')}>
+        <Button variant="outline" onClick={() => router.push("/onboarding")}>
           <ArrowLeft className="w-4 h-4 mr-2" />
           Go to Onboarding
         </Button>
@@ -241,18 +266,22 @@ export default function ResultsPage() {
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Analysis Results</h1>
           <p className="text-gray-500 mt-1">
-            Credit intelligence report for{' '}
-            <span className="font-medium text-gray-700">{entity_profile.company_name}</span>
+            Credit intelligence report for{" "}
+            <span className="font-medium text-gray-700">
+              {entity_profile.company_name}
+            </span>
           </p>
           {sessionId && (
-            <p className="text-xs text-gray-400 mt-0.5 font-mono">Session: {sessionId}</p>
+            <p className="text-xs text-gray-400 mt-0.5 font-mono">
+              Session: {sessionId}
+            </p>
           )}
         </div>
         <div className="flex gap-2">
           <Button
             variant="outline"
             size="sm"
-            onClick={() => router.push('/onboarding')}
+            onClick={() => router.push("/onboarding")}
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             New Assessment
@@ -263,7 +292,7 @@ export default function ResultsPage() {
             className="text-gray-400 hover:text-red-500"
             onClick={() => {
               reset();
-              router.push('/onboarding');
+              router.push("/onboarding");
             }}
           >
             Clear & Reset
@@ -283,15 +312,21 @@ export default function ResultsPage() {
           <CardContent className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-gray-500">Company</span>
-              <span className="font-medium text-gray-800">{entity_profile.company_name}</span>
+              <span className="font-medium text-gray-800">
+                {entity_profile.company_name}
+              </span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-500">CIN</span>
-              <span className="font-mono text-xs text-gray-700">{entity_profile.cin}</span>
+              <span className="font-mono text-xs text-gray-700">
+                {entity_profile.cin}
+              </span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-500">PAN</span>
-              <span className="font-mono text-xs text-gray-700">{entity_profile.pan}</span>
+              <span className="font-mono text-xs text-gray-700">
+                {entity_profile.pan}
+              </span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-500">Sector</span>
@@ -314,7 +349,9 @@ export default function ResultsPage() {
           <CardContent className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-gray-500">Loan Type</span>
-              <span className="font-medium text-gray-800">{loan_details.loan_type}</span>
+              <span className="font-medium text-gray-800">
+                {loan_details.loan_type}
+              </span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-500">Amount</span>
@@ -326,7 +363,9 @@ export default function ResultsPage() {
             </div>
             <div className="flex justify-between">
               <span className="text-gray-500">Interest Rate</span>
-              <span className="text-gray-700">{loan_details.interest_rate}</span>
+              <span className="text-gray-700">
+                {loan_details.interest_rate}
+              </span>
             </div>
           </CardContent>
         </Card>
@@ -336,9 +375,9 @@ export default function ResultsPage() {
       <Card>
         <CardHeader className="pb-3">
           <CardTitle className="text-lg flex items-center gap-2">
-            {risk_level === 'High' ? (
+            {risk_level === "High" ? (
               <ShieldAlert className="w-5 h-5 text-red-600" />
-            ) : risk_level === 'Moderate' ? (
+            ) : risk_level === "Moderate" ? (
               <ShieldAlert className="w-5 h-5 text-yellow-600" />
             ) : (
               <ShieldCheck className="w-5 h-5 text-green-600" />
@@ -349,7 +388,9 @@ export default function ResultsPage() {
         <CardContent className="space-y-4">
           <div className="flex items-end gap-4">
             <div>
-              <p className={cn('text-6xl font-bold', riskScoreColor(risk_score))}>
+              <p
+                className={cn("text-6xl font-bold", riskScoreColor(risk_score))}
+              >
                 {risk_score}
               </p>
               <p className="text-sm text-gray-400">/ 100</p>
@@ -357,7 +398,10 @@ export default function ResultsPage() {
             <div className="flex-1 space-y-2 pb-1">
               <div className="w-full bg-gray-100 rounded-full h-3">
                 <div
-                  className={cn('h-3 rounded-full transition-all', riskBarColor(risk_score))}
+                  className={cn(
+                    "h-3 rounded-full transition-all",
+                    riskBarColor(risk_score),
+                  )}
                   style={{ width: `${risk_score}%` }}
                 />
               </div>
@@ -369,8 +413,8 @@ export default function ResultsPage() {
             </div>
             <Badge
               className={cn(
-                'text-sm px-3 py-1 border font-semibold',
-                riskColor(risk_level)
+                "text-sm px-3 py-1 border font-semibold",
+                riskColor(risk_level),
               )}
               variant="outline"
             >
@@ -389,15 +433,15 @@ export default function ResultsPage() {
             <Badge
               variant="outline"
               className={cn(
-                'ml-auto text-xs',
+                "ml-auto text-xs",
                 fraud_flags.length === 0
-                  ? 'bg-green-50 text-green-700 border-green-200'
-                  : 'bg-red-50 text-red-700 border-red-200'
+                  ? "bg-green-50 text-green-700 border-green-200"
+                  : "bg-red-50 text-red-700 border-red-200",
               )}
             >
               {fraud_flags.length === 0
-                ? 'No flags detected'
-                : `${fraud_flags.length} flag${fraud_flags.length !== 1 ? 's' : ''} detected`}
+                ? "No flags detected"
+                : `${fraud_flags.length} flag${fraud_flags.length !== 1 ? "s" : ""} detected`}
             </Badge>
           </CardTitle>
         </CardHeader>
@@ -453,7 +497,9 @@ export default function ResultsPage() {
             )}
             {gst_analysis.top_buyers && gst_analysis.top_buyers.length > 0 && (
               <div className="col-span-2 mt-1">
-                <p className="text-xs text-gray-500 uppercase tracking-wide mb-2">Top Buyers</p>
+                <p className="text-xs text-gray-500 uppercase tracking-wide mb-2">
+                  Top Buyers
+                </p>
                 <div className="space-y-1">
                   {gst_analysis.top_buyers.slice(0, 3).map((b) => (
                     <div
@@ -495,7 +541,7 @@ export default function ResultsPage() {
             <MetricCard
               label="Net Flow"
               value={formatNumber(bank_analysis.net_flow)}
-              sub={bank_analysis.net_flow >= 0 ? 'Positive' : 'Negative'}
+              sub={bank_analysis.net_flow >= 0 ? "Positive" : "Negative"}
               icon={<Banknote className="w-4 h-4" />}
             />
             <MetricCard
@@ -518,17 +564,33 @@ export default function ResultsPage() {
         <CardContent className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
             {[
-              { label: 'Loan Amount',             value: financial_commitments.loan_amount },
-              { label: 'Lender',                  value: financial_commitments.lender },
-              { label: 'Sanction Limit',          value: financial_commitments.sanction_limit },
-              { label: 'Contingent Liabilities',  value: financial_commitments.contingent_liabilities },
-              { label: 'Legal Cases',             value: financial_commitments.legal_cases },
-              { label: 'Guarantees',              value: financial_commitments.guarantees },
+              {
+                label: "Loan Amount",
+                value: financial_commitments.loan_amount,
+              },
+              { label: "Lender", value: financial_commitments.lender },
+              {
+                label: "Sanction Limit",
+                value: financial_commitments.sanction_limit,
+              },
+              {
+                label: "Contingent Liabilities",
+                value: financial_commitments.contingent_liabilities,
+              },
+              {
+                label: "Legal Cases",
+                value: financial_commitments.legal_cases,
+              },
+              { label: "Guarantees", value: financial_commitments.guarantees },
             ].map(({ label, value }) => (
               <div key={label} className="flex flex-col gap-0.5">
-                <span className="text-xs text-gray-400 uppercase tracking-wide">{label}</span>
+                <span className="text-xs text-gray-400 uppercase tracking-wide">
+                  {label}
+                </span>
                 <span className="text-gray-800">
-                  {value ?? <span className="text-gray-300 italic">Not found</span>}
+                  {value ?? (
+                    <span className="text-gray-300 italic">Not found</span>
+                  )}
                 </span>
               </div>
             ))}

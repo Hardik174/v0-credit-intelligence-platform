@@ -161,16 +161,22 @@
 //   );
 // }
 
+"use client";
 
-'use client';
-
-import React from 'react';
-import { useSessionStore } from '@/store/sessionStore';
-import { useResearch } from '@/hooks/useResearch';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { TrendingUp, TrendingDown, Minus, ExternalLink } from 'lucide-react';
-import { ChartSkeleton } from '@/components/shared/LoadingSkeleton';
+import React from "react";
+import { useSessionStore } from "@/store/sessionStore";
+import { useResearch } from "@/hooks/useResearch";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  TrendingUp,
+  TrendingDown,
+  Minus,
+  ExternalLink,
+  AlertCircle,
+} from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { ChartSkeleton } from "@/components/shared/LoadingSkeleton";
 import {
   LineChart,
   Line,
@@ -180,13 +186,18 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-} from 'recharts';
+} from "recharts";
 
 export default function ResearchPage() {
+  const { sessionId, analysisResult } = useSessionStore();
 
-  const { sessionId } = useSessionStore();
+  // Extract company name from analysisResult for fallback when no sessionId
+  const companyName: string | undefined = sessionId
+    ? undefined // session-based lookup takes priority
+    : ((analysisResult as any)?.entity_profile?.company_name ?? "Demo Company");
 
-  const { insights, sectorTrends, macroIndicators, isLoading } = useResearch(sessionId || undefined);
+  const { insights, sectorTrends, macroIndicators, isLoading, error } =
+    useResearch(sessionId ?? undefined, companyName);
 
   if (isLoading) {
     return (
@@ -199,20 +210,20 @@ export default function ResearchPage() {
 
   const getSentimentColor = (sentiment: string) => {
     switch (sentiment) {
-      case 'Positive':
-        return 'bg-green-100 text-green-700';
-      case 'Negative':
-        return 'bg-red-100 text-red-700';
+      case "Positive":
+        return "bg-green-100 text-green-700";
+      case "Negative":
+        return "bg-red-100 text-red-700";
       default:
-        return 'bg-gray-100 text-gray-700';
+        return "bg-gray-100 text-gray-700";
     }
   };
 
   const getTrendIcon = (trend: string) => {
     switch (trend) {
-      case 'up':
+      case "up":
         return <TrendingUp className="w-4 h-4 text-green-500" />;
-      case 'down':
+      case "down":
         return <TrendingDown className="w-4 h-4 text-red-500" />;
       default:
         return <Minus className="w-4 h-4 text-gray-500" />;
@@ -221,13 +232,22 @@ export default function ResearchPage() {
 
   return (
     <div className="space-y-6">
-
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Research Insights</h1>
         <p className="text-gray-600 mt-1">
           AI-powered secondary research and market intelligence
         </p>
       </div>
+
+      {error && (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>
+            Could not fetch live research data: {error}. Showing cached
+            indicators below.
+          </AlertDescription>
+        </Alert>
+      )}
 
       <Card>
         <CardHeader>
@@ -241,8 +261,18 @@ export default function ResearchPage() {
               <YAxis stroke="#6b7280" />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="sectorIndex" stroke="#ef4444" strokeWidth={2} />
-              <Line type="monotone" dataKey="entityPerformance" stroke="#3b82f6" strokeWidth={2} />
+              <Line
+                type="monotone"
+                dataKey="sectorIndex"
+                stroke="#ef4444"
+                strokeWidth={2}
+              />
+              <Line
+                type="monotone"
+                dataKey="entityPerformance"
+                stroke="#3b82f6"
+                strokeWidth={2}
+              />
             </LineChart>
           </ResponsiveContainer>
         </CardContent>
@@ -255,22 +285,15 @@ export default function ResearchPage() {
 
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-
             {macroIndicators.map((indicator) => (
-
               <div
                 key={indicator.name}
                 className="p-3 bg-gray-50 rounded-lg border border-gray-200"
               >
-
                 <div className="flex items-center justify-between mb-1">
-
-                  <p className="font-medium text-gray-900">
-                    {indicator.name}
-                  </p>
+                  <p className="font-medium text-gray-900">{indicator.name}</p>
 
                   {getTrendIcon(indicator.trend)}
-
                 </div>
 
                 <p className="text-2xl font-bold text-gray-900">
@@ -278,80 +301,61 @@ export default function ResearchPage() {
                 </p>
 
                 <p className="text-xs text-gray-500 mt-1">
-                  {indicator.change > 0 ? '+' : ''}
+                  {indicator.change > 0 ? "+" : ""}
                   {indicator.change} change
                 </p>
-
               </div>
-
             ))}
-
           </div>
         </CardContent>
       </Card>
 
       <Card>
-
         <CardHeader>
-          <CardTitle>
-            Latest Research ({insights.length})
-          </CardTitle>
+          <CardTitle>Latest Research ({insights.length})</CardTitle>
         </CardHeader>
 
         <CardContent className="space-y-4">
-
           {insights.map((insight) => (
-
             <div
               key={insight.id}
               className="p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow"
             >
-
               <div className="flex items-start justify-between mb-2">
-
                 <div className="flex-1">
-
                   <h4 className="font-semibold text-gray-900 leading-tight">
                     {insight.headline}
                   </h4>
 
-                  <p className="text-xs text-gray-500 mt-1">
-                    {insight.source}
-                  </p>
-
+                  <p className="text-xs text-gray-500 mt-1">{insight.source}</p>
                 </div>
 
                 <Badge className={getSentimentColor(insight.sentiment)}>
                   {insight.sentiment}
                 </Badge>
-
               </div>
 
-              <p className="text-sm text-gray-600 mb-3">
-                {insight.summary}
-              </p>
+              <p className="text-sm text-gray-600 mb-3">{insight.summary}</p>
 
               <div className="flex items-center justify-between">
-
                 <span className="text-xs text-gray-400">
                   {new Date(insight.publishedAt).toLocaleDateString()}
                 </span>
 
                 {insight.url && (
-                  <a href={insight.url} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={insight.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <ExternalLink className="w-4 h-4" />
                   </a>
                 )}
-
               </div>
-
             </div>
-
           ))}
-
         </CardContent>
       </Card>
-
     </div>
   );
 }

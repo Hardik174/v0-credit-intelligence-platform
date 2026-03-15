@@ -26,3 +26,21 @@ def get_entity_profile(session_id: str):
 def get_loan_details(session_id: str):
     session = get_session(session_id)
     return session.loan_details
+
+
+# ---------------------------------------------------------------------------
+# Extraction pipeline wrapper
+# Delegates to the implementation in credit_ingestor.app so that both the
+# legacy /api/ingestor/extract-data endpoint AND the new root-level router
+# share exactly the same extraction logic without duplication.
+# ---------------------------------------------------------------------------
+
+def run_extraction_pipeline(session):
+    """
+    Execute the full extraction + fraud-detection + risk-scoring pipeline.
+
+    Delegates to credit_ingestor.app._run_extraction_pipeline.
+    Local import avoids circular dependency at module load time.
+    """
+    from credit_ingestor.app import _run_extraction_pipeline  # noqa: PLC0415
+    return _run_extraction_pipeline(session)

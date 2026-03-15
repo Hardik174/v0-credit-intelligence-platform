@@ -36,16 +36,15 @@ export function getStatusColor(status: string): string {
   return colors[status] || 'bg-gray-100 text-gray-700';
 }
 
+// Risk score: 0-30 = Low (green), 31-60 = Moderate (yellow), 61-100 = High (red)
 export function getRiskColor(score: number): string {
-  if (score >= 80) return 'text-green-600';
-  if (score >= 60) return 'text-yellow-600';
-  if (score >= 40) return 'text-orange-600';
+  if (score <= 30) return 'text-green-600';
+  if (score <= 60) return 'text-yellow-600';
   return 'text-red-600';
 }
 
 export function getRiskBgColor(score: number): string {
-  if (score >= 80) return 'bg-green-500';
-  if (score >= 60) return 'bg-yellow-500';
-  if (score >= 40) return 'bg-orange-500';
+  if (score <= 30) return 'bg-green-500';
+  if (score <= 60) return 'bg-yellow-500';
   return 'bg-red-500';
 }

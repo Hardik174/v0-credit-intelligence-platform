@@ -1,30 +1,110 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { useCAM } from '@/hooks/useCAM';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { ChartSkeleton } from '@/components/shared/LoadingSkeleton';
-import { Download, Share2, Edit2, Check } from 'lucide-react';
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useSessionStore } from "@/store/sessionStore";
+import { useCAM } from "@/hooks/useCAM";
+import { api } from "@/lib/api";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { ChartSkeleton } from "@/components/shared/LoadingSkeleton";
+import {
+  Download,
+  Share2,
+  Edit2,
+  Check,
+  AlertTriangle,
+  ArrowLeft,
+} from "lucide-react";
 
 export default function CAMReportPage() {
-  const { cam, isLoading, updateSection } = useCAM();
+  const router = useRouter();
+  const { sessionId, analysisResult } = useSessionStore();
   const [editingSectionId, setEditingSectionId] = useState<string | null>(null);
-  const [editContent, setEditContent] = useState('');
+  const [editContent, setEditContent] = useState("");
+
+  // Derive company name from session result for standalone-CAM fallback
+  const companyName: string | undefined =
+    (analysisResult as any)?.entity_profile?.company_name ??
+    (analysisResult as any)?.financial_analysis?.entity_profile?.company_name ??
+    undefined;
+
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [downloadError, setDownloadError] = useState<string | null>(null);
+
+  const { cam, isLoading, error, updateSection } = useCAM(
+    sessionId ?? undefined,
+    companyName,
+  );
+
+  // Use the canonical /api/cam-report/{id}/download endpoint.
+  // The backend resolves the id as a session first, then as a company name.
+  const downloadId = sessionId ?? companyName ?? null;
+
+  const handleDownloadPDF = async () => {
+    if (!downloadId) return;
+    setIsDownloading(true);
+    setDownloadError(null);
+    try {
+      await api.downloadCAM(downloadId);
+    } catch (err) {
+      const msg =
+        err instanceof Error
+          ? err.message
+          : "PDF download failed. Please try again.";
+      console.error("[CAM] PDF download failed:", err);
+      setDownloadError(msg);
+    } finally {
+      setIsDownloading(false);
+    }
+  };
 
   if (isLoading) {
     return (
       <div className="space-y-6">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">
+            Credit Assessment Memorandum
+          </h1>
+          <p className="text-gray-500 mt-1 text-sm">
+            Generating report from session data…
+          </p>
+        </div>
         <ChartSkeleton />
         <ChartSkeleton />
       </div>
     );
   }
 
-  if (!cam) {
-    return <div>No CAM report available</div>;
+  if (!cam && !isLoading) {
+    return (
+      <div className="max-w-2xl space-y-4">
+        <h1 className="text-3xl font-bold text-gray-900">
+          Credit Assessment Memorandum
+        </h1>
+        {error ? (
+          <Alert variant="destructive">
+            <AlertTriangle className="h-4 w-4" />
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        ) : (
+          <Alert>
+            <AlertTriangle className="h-4 w-4" />
+            <AlertDescription>
+              No active session found. Complete the onboarding pipeline to
+              generate a CAM report.
+            </AlertDescription>
+          </Alert>
+        )}
+        <Button variant="outline" onClick={() => router.push("/onboarding")}>
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Go to Onboarding
+        </Button>
+      </div>
+    );
   }
 
   const handleEditSection = (sectionId: string, content: string) => {
@@ -35,7 +115,7 @@ export default function CAMReportPage() {
   const handleSaveSection = (sectionId: string) => {
     updateSection(sectionId, editContent);
     setEditingSectionId(null);
-    setEditContent('');
+    setEditContent("");
   };
 
   return (
@@ -43,13 +123,23 @@ export default function CAMReportPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Credit Assessment Memorandum</h1>
-          <p className="text-gray-600 mt-1">CAM Status: {cam.status}</p>
+          <h1 className="text-3xl font-bold text-gray-900">
+            Credit Assessment Memorandum
+          </h1>
+          <p className="text-gray-600 mt-1">
+            {cam?.entityId} ·{" "}
+            <span className="capitalize">{cam?.status?.replace("_", " ")}</span>
+          </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleDownloadPDF}
+            disabled={!downloadId || isDownloading}
+          >
             <Download className="w-4 h-4 mr-2" />
-            PDF
+            {isDownloading ? "Downloading…" : "PDF"}
           </Button>
           <Button variant="outline" size="sm">
             <Share2 className="w-4 h-4 mr-2" />
@@ -58,21 +148,31 @@ export default function CAMReportPage() {
         </div>
       </div>
 
+      {/* Download error alert */}
+      {downloadError && (
+        <Alert variant="destructive">
+          <AlertTriangle className="h-4 w-4" />
+          <AlertDescription>{downloadError}</AlertDescription>
+        </Alert>
+      )}
+
       {/* CAM Info */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600">Status</CardTitle>
+            <CardTitle className="text-sm font-medium text-gray-600">
+              Status
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <Badge className="capitalize">
-              {cam.status.replace('_', ' ')}
-            </Badge>
+            <Badge className="capitalize">{cam.status.replace("_", " ")}</Badge>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600">Generated</CardTitle>
+            <CardTitle className="text-sm font-medium text-gray-600">
+              Generated
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-sm font-medium">
@@ -82,7 +182,9 @@ export default function CAMReportPage() {
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600">Last Modified</CardTitle>
+            <CardTitle className="text-sm font-medium text-gray-600">
+              Last Modified
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-sm font-medium">
@@ -103,7 +205,9 @@ export default function CAMReportPage() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => handleEditSection(section.id, section.content)}
+                    onClick={() =>
+                      handleEditSection(section.id, section.content)
+                    }
                   >
                     <Edit2 className="w-4 h-4" />
                   </Button>
@@ -137,44 +241,53 @@ export default function CAMReportPage() {
                 </div>
               ) : (
                 <div className="cam-content prose prose-sm max-w-none">
-                  {section.content.split('\n').map((paragraph, i) => {
-                    if (paragraph.startsWith('##')) {
+                  {section.content.split("\n").map((paragraph, i) => {
+                    if (paragraph.startsWith("##")) {
                       return (
                         <h2
                           key={i}
                           className="text-lg font-semibold text-gray-900 mt-4 mb-2"
                         >
-                          {paragraph.replace('##', '').trim()}
+                          {paragraph.replace("##", "").trim()}
                         </h2>
                       );
                     }
-                    if (paragraph.startsWith('###')) {
+                    if (paragraph.startsWith("###")) {
                       return (
                         <h3
                           key={i}
                           className="text-base font-medium text-gray-800 mt-3 mb-2"
                         >
-                          {paragraph.replace('###', '').trim()}
+                          {paragraph.replace("###", "").trim()}
                         </h3>
                       );
                     }
-                    if (paragraph.startsWith('-') || paragraph.startsWith('*')) {
+                    if (
+                      paragraph.startsWith("-") ||
+                      paragraph.startsWith("*")
+                    ) {
                       return (
                         <li key={i} className="text-gray-600 ml-6">
-                          {paragraph.replace(/^[-*]\s/, '').trim()}
+                          {paragraph.replace(/^[-*]\s/, "").trim()}
                         </li>
                       );
                     }
-                    if (paragraph.startsWith('|')) {
+                    if (paragraph.startsWith("|")) {
                       return (
-                        <p key={i} className="text-xs font-mono text-gray-600 overflow-x-auto">
+                        <p
+                          key={i}
+                          className="text-xs font-mono text-gray-600 overflow-x-auto"
+                        >
                           {paragraph}
                         </p>
                       );
                     }
                     if (paragraph.trim()) {
                       return (
-                        <p key={i} className="text-gray-600 mb-2 leading-relaxed">
+                        <p
+                          key={i}
+                          className="text-gray-600 mb-2 leading-relaxed"
+                        >
                           {paragraph.trim()}
                         </p>
                       );
