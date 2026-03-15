@@ -1,6 +1,17 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
-  ? `${process.env.NEXT_PUBLIC_API_URL}/api`
-  : (process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:8000/api');
+function normalizeApiBase(): string {
+  const directBase = process.env.NEXT_PUBLIC_API_BASE;
+  if (directBase) return directBase.replace(/\/$/, '');
+
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (apiUrl) {
+    const clean = apiUrl.replace(/\/$/, '');
+    return clean.endsWith('/api') ? clean : `${clean}/api`;
+  }
+
+  return 'http://localhost:8000/api';
+}
+
+const API_BASE_URL = normalizeApiBase();
 
 class ApiClient {
   private baseUrl: string;

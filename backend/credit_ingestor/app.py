@@ -70,8 +70,8 @@ class ClassificationOverrideRequest(BaseModel):
 
 
 # Directories initialization
-config.UPLOAD_DIR.mkdir(exist_ok=True)
-config.OUTPUT_DIR.mkdir(exist_ok=True)
+config.UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+config.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 # ---------------------------------------------------------------------------
 # App setup

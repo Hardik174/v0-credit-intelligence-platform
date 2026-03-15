@@ -41,6 +41,13 @@ logger = logging.getLogger(__name__)
 
 
 # ---------------------------------------------------------------------------
+# Runtime detection
+# ---------------------------------------------------------------------------
+
+IS_VERCEL: bool = os.environ.get("VERCEL") == "1"
+
+
+# ---------------------------------------------------------------------------
 # Groq LLM
 # ---------------------------------------------------------------------------
 
@@ -84,8 +91,9 @@ PDF_TEXT_CHAR_LIMIT: int = int(os.environ.get("PDF_TEXT_CHAR_LIMIT", "8000"))
 # Upload / output paths
 # ---------------------------------------------------------------------------
 
-UPLOAD_DIR: Path = Path(os.environ.get("UPLOAD_DIR", "uploads"))
-OUTPUT_DIR: Path = Path(os.environ.get("OUTPUT_DIR", "outputs"))
+_default_base_dir = Path("/tmp/credit-intelligence") if IS_VERCEL else Path(".")
+UPLOAD_DIR: Path = Path(os.environ.get("UPLOAD_DIR", str(_default_base_dir / "uploads")))
+OUTPUT_DIR: Path = Path(os.environ.get("OUTPUT_DIR", str(_default_base_dir / "outputs")))
 
 
 # ---------------------------------------------------------------------------

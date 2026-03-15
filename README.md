@@ -233,6 +233,9 @@ POST   /ai/chat
 
 ## 🛠️ Development Setup
 
+For deployment on Vercel (frontend + backend as separate projects), see
+`DEPLOYMENT_VERCEL.md`.
+
 ### Prerequisites
 - Node.js 18+
 - npm or pnpm

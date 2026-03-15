@@ -28,9 +28,10 @@ import {
 // live at the root level (e.g. /entity-onboard, /generate-cam-report/{id}).
 // NEXT_PUBLIC_API_URL should NOT be used here — it points to the /api prefix
 // used by the older api.ts client. Use NEXT_PUBLIC_INGESTOR_URL instead.
-const INGESTOR_BASE_URL =
+const INGESTOR_BASE_URL = (
   process.env.NEXT_PUBLIC_INGESTOR_URL ||
-  'http://localhost:8000';
+  'http://localhost:8000'
+).replace(/\/$/, '');
 
 // ---------------------------------------------------------------------------
 // Internal error handler

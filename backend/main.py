@@ -37,6 +37,8 @@ System:
   GET  /redoc                             ← ReDoc (auto-generated)
 """
 
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -75,12 +77,17 @@ app = FastAPI(
 # CORS
 # ---------------------------------------------------------------------------
 
+_raw_origins = os.getenv("CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000")
+_allow_origins = [o.strip() for o in _raw_origins.split(",") if o.strip()]
+_allow_all = "*" in _allow_origins
+
 app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],          # tighten to specific origins in production
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+  CORSMiddleware,
+  allow_origins=["*"] if _allow_all else _allow_origins,
+  # Browsers reject wildcard origin + credentials. Keep this false for "*" mode.
+  allow_credentials=not _allow_all,
+  allow_methods=["*"],
+  allow_headers=["*"],
 )
 
 # ---------------------------------------------------------------------------

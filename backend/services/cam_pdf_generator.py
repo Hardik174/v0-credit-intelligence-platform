@@ -17,12 +17,13 @@ from pathlib import Path
 from typing import Any, Dict
 
 from fastapi import HTTPException
+from credit_ingestor import config
 from services.cam_builder import build_cam_report
 
 # ---------------------------------------------------------------------------
-# PDF output directory  →  backend/outputs/  (same folder as JSON reports)
+# PDF output directory  (configurable; defaults to /tmp on Vercel)
 # ---------------------------------------------------------------------------
-_PDF_OUTPUT_DIR = Path(__file__).parent.parent / "outputs"
+_PDF_OUTPUT_DIR = config.OUTPUT_DIR
 _PDF_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 
