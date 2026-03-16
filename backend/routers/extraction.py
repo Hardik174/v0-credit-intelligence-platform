@@ -14,9 +14,9 @@ import uuid
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
 
-from credit_ingestor import config
-from credit_ingestor.sessions import SessionStatus, store
-from services.ingestion_service import run_extraction_pipeline
+from backend.credit_ingestor import config
+from backend.credit_ingestor.sessions import SessionStatus, store
+from backend.services.ingestion_service import run_extraction_pipeline
 
 logger = logging.getLogger(__name__)
 
