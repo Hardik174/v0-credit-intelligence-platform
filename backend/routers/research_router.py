@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from services.research_service import run_research, run_research_by_company
+from backend.services.research_service import run_research, run_research_by_company
 
 router = APIRouter(prefix="/api/research", tags=["Research"])
 
