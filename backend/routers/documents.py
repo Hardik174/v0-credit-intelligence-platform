@@ -18,9 +18,9 @@ from fastapi import APIRouter, File, HTTPException, UploadFile
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-from credit_ingestor import config
-from credit_ingestor.classifier import classify_many
-from credit_ingestor.sessions import SessionStatus, store
+from backend.credit_ingestor import config
+from backend.credit_ingestor.classifier import classify_many
+from backend.credit_ingestor.sessions import SessionStatus, store
 
 logger = logging.getLogger(__name__)
 
