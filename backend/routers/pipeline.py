@@ -27,11 +27,11 @@ from typing import Any, Dict, List, Optional
 from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 from fastapi.responses import JSONResponse
 
-from credit_ingestor import config
-from credit_ingestor.classifier import classify_many
-from credit_ingestor.sessions import SessionStatus, store
-from services.cam_report_generator import generate_cam_report
-from services.ingestion_service import run_extraction_pipeline
+from backend.credit_ingestor import config
+from backend.credit_ingestor.classifier import classify_many
+from backend.credit_ingestor.sessions import SessionStatus, store
+from backend.services.cam_report_generator import generate_cam_report
+from backend.services.ingestion_service import run_extraction_pipeline
 
 logger = logging.getLogger(__name__)
 
