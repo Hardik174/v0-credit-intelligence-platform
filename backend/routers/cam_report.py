@@ -16,8 +16,8 @@ always reflect the actual ingestor pipeline results.
 from fastapi import APIRouter
 from fastapi.responses import FileResponse
 
-from services.cam_builder import build_cam_report
-from services.cam_pdf_generator import generate_cam_pdf
+from backend.services.cam_builder import build_cam_report
+from backend.services.cam_pdf_generator import generate_cam_pdf
 
 router = APIRouter(tags=["CAM Report"])
 
