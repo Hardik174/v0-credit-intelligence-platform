@@ -43,19 +43,18 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 # ── New root-level routers ────────────────────────────────────────────────────
-from routers.onboarding import router as onboarding_router
-from routers.documents import router as documents_router
-from routers.extraction import router as extraction_router
-from routers.analysis import router as analysis_router
-from routers.cam_report import router as cam_report_router
-from routers.pipeline import router as pipeline_router
+from backend.routers.onboarding import router as onboarding_router
+from backend.routers.documents import router as documents_router
+from backend.routers.extraction import router as extraction_router
+from backend.routers.analysis import router as analysis_router
+from backend.routers.cam_report import router as cam_report_router
+from backend.routers.pipeline import router as pipeline_router
 
-# ── Legacy / downstream routers (unchanged) ───────────────────────────────────
-from routers.ingestor_router import router as ingestor_router
-from routers.research_router import router as research_router, insights_router as research_insights_router
-from routers.risk_router import router as risk_router
-from routers.credit_router import router as credit_router
-from routers.cam_router import router as cam_router
+from backend.routers.ingestor_router import router as ingestor_router
+from backend.routers.research_router import router as research_router, insights_router as research_insights_router
+from backend.routers.risk_router import router as risk_router
+from backend.routers.credit_router import router as credit_router
+from backend.routers.cam_router import router as cam_router
 
 os.makedirs("uploads", exist_ok=True)
 os.makedirs("outputs", exist_ok=True)
