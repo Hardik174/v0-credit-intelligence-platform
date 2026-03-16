@@ -10,7 +10,7 @@ Returns the structured FullAnalysisResponse for downstream modules
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse
 
-from credit_ingestor.sessions import store
+from backend.credit_ingestor.sessions import store
 
 router = APIRouter(tags=["Financial Analysis"])
 
