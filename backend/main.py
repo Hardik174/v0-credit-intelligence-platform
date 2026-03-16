@@ -57,6 +57,9 @@ from routers.risk_router import router as risk_router
 from routers.credit_router import router as credit_router
 from routers.cam_router import router as cam_router
 
+os.makedirs("uploads", exist_ok=True)
+os.makedirs("outputs", exist_ok=True)
+
 # ---------------------------------------------------------------------------
 # App factory
 # ---------------------------------------------------------------------------
