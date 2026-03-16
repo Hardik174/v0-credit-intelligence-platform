@@ -38,7 +38,6 @@ colorama==0.4.6
 cryptography==46.0.5
 cssselect==1.4.0
 et_xmlfile==2.0.0
-fastapi==0.135.1
 feedfinder2==0.0.4
 feedparser==6.0.12
 filelock==3.25.2
