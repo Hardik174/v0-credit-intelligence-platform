@@ -15,8 +15,8 @@ The ``id`` path parameter is resolved as follows:
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import FileResponse
 
-from services.cam_builder import build_cam_report
-from services.cam_service import generate_cam_by_company
+from backend.services.cam_builder import build_cam_report
+from backend.services.cam_service import generate_cam_by_company
 
 router = APIRouter(prefix="/api/cam-report", tags=["CAM Report"])
 
