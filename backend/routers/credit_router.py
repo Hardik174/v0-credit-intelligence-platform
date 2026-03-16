@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from services.credit_service import get_credit_decision
+from backend.services.credit_service import get_credit_decision
 
 router = APIRouter(prefix="/api/credit-decision", tags=["Credit Decision"])
 
