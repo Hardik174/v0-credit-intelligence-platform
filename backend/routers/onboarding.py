@@ -12,7 +12,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-from credit_ingestor.sessions import store
+from backend.credit_ingestor.sessions import store
 
 logger = logging.getLogger(__name__)
 
