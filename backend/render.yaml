@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: v0-credit-intelligence-backend
+    runtime: docker
+    plan: starter
+    autoDeploy: true
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: CORS_ORIGINS
+        value: "*"
