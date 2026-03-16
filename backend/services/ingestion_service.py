@@ -1,5 +1,5 @@
 from fastapi import HTTPException
-from credit_ingestor.sessions import store
+from backend.credit_ingestor.sessions import store
 
 def get_session(session_id: str):
     session = store.get(session_id)
