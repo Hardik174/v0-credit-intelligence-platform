@@ -1,1 +1,1 @@
-from credit_ingestor.app import router
+from backend.credit_ingestor.app import router
